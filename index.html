@@ -19,8 +19,8 @@
     <!-- TODO: この中に State を利用した HTML を書く -->
     <h4>都道府県</h4>
     <span v-for="(estate, index) in estates">
-    <input type="checkbox" v-bind:id="'e'+ index">
-    <label v-bind:for="'e'+ index">{{estate}}</label>
+      <input type="checkbox" v-bind:id="'e'+ index">
+      <label v-bind:for="'e'+ index">{{estate}}</label>
     </span>
   </div>
 </body>
