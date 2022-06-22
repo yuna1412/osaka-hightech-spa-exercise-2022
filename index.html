@@ -17,12 +17,11 @@
 <body>
   <div id="app">
     <!-- TODO: この中に State を利用した HTML を書く -->
-    <p>都道府県</p>
-    <br><input type="checkbox"> A
-    <br><input type="checkbox"> B
-    <br><input type="checkbox"> C
-
-
+    <h4>都道府県</h4>
+    <span v-for="(estate, index) in estates">
+    <input type="checkbox" v-bind:id="'e'+ index">
+    <label v-bind:for="'e'+ index">{{estate}}</label>
+    </span>
   </div>
 </body>
 
