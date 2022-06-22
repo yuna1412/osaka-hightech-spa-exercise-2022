@@ -1,18 +1,9 @@
 // TODO: 公式リファレンスに沿って JavaScript を記述
-const EventHandling = {
+const TwoWayBinding = {
   data() {
     return {
-      message: 'Hello Vue.js!'
-    }
-  },
-  methods: {
-    reverseMessage() {
-      this.message = this.message
-        .split('')
-        .reverse()
-        .join('')
+      message: 'Hello Vue!'
     }
   }
 }
-
-Vue.createApp(EventHandling).mount('#event-handling')
+Vue.createApp(TwoWayBinding).mount('#two-way-binding')
