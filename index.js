@@ -1,10 +1,10 @@
 // TODO: 公式リファレンスに沿って JavaScript を記述
-const Counter = {
-    data() {
-      return {
-        counter: 0
-      }
+const AttributeBinding = {
+  data() {
+    return {
+      message: 'You loaded this page on ' + new Date().toLocaleString()
     }
   }
-  
-  Vue.createApp(Counter).mount('#counter')
+}
+
+Vue.createApp(AttributeBinding).mount('#bind-attribute')
