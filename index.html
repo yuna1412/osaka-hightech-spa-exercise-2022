@@ -23,7 +23,11 @@
     </span>
 
     <h2>人口グラフ</h2>
-    <div class="container">
+    <div class="app">
+      <span v-for="(item, index) in itemss">
+        <label v-bind:for="">{{item}}</label>
+
+      </span>
       <div class="item" style="height: 100px;"></div>
       <div class="item" style="height: 90px;"></div>
       <div class="item" style="height: 80px;"></div>
