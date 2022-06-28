@@ -23,23 +23,11 @@
     </span>
 
 
-    <div id="app">
       <h2>人口グラフ</h2>
       <span v-for="(class, index) in classes">
-        <input v-bind:id="'c' + index">
-        <label v-bind:for="'c' + index">{{}}</label>
-
+        <div class="item">
+        <div v-bind style="{'height':'classes' + 'px'}">{{classes}}</label>
       </span>
-      <div class="item" style="height: 100px;"></div>
-      <div class="item" style="height: 90px;"></div>
-      <div class="item" style="height: 80px;"></div>
-      <div class="item" style="height: 70px;"></div>
-      <div class="item" style="height: 60px;"></div>
-      <div class="item" style="height: 50px;"></div>
-      <div class="item" style="height: 40px;"></div>
-      <div class="item" style="height: 30px;"></div>
-      <div class="item" style="height: 20px;"></div>
-      <div class="item" style="height: 10px;"></div>
     </div>
   </div>
 </body>
