@@ -1,8 +1,8 @@
 // TODO: 公式リファレンスに沿って JavaScript を記述
-const RootComponent = {
+const PrefectureCheckbox = {
   data(){
     return{
-      estates:[
+      prefectures: [
         '北海道',
         '青森県','岩手県','宮城県','秋田県','山形県','福島県',
         '茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県',
@@ -12,8 +12,39 @@ const RootComponent = {
         '徳島県','香川県','愛媛県','高知県',
         '福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'
       ],
+    };
+  },
+  /* html */
+  template: `
+  <span v-for="(prefecture, index) in prefectures">
+    <input type="checkbox" v-bind:id="'e' + index">
+    <label v-bind:for="'e' + index">{{ prefecture }}</label>
+  </span>
+  `,
+};
+
+const PopulationBarPlot = {
+  data() {
+    return {
       populations: [ 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 ],
     };
+  },
+  /* html */
+  template: `
+  <div class="container">
+    <div
+      v-for="population in populations"
+      class="item"
+      v-bind:style="'height: ' + population + 'px;'"
+    ></div>
+  </div>
+  `,
+};
+
+const RootComponent = {
+  components: {
+    PrefectureCheckbox,
+    PopulationBarPlot,
   },
 };
 
