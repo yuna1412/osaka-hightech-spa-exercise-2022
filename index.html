@@ -24,10 +24,12 @@
 
 
     <h2>人口グラフ</h2>
-     <div class = "container">
-      <span v-for="(classes, index) in classes">
-        <div class="item" v-bind:style="{'height':classes +'px'}">{{classes}}</div>
-      </span>
+    <div class="container">
+      <div
+        v-for="population in populations"
+        class="item"
+        v-bind:style="'height: ' + population + 'px;'"
+      ></div>
     </div>
   </div>
 </body>
