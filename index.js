@@ -28,7 +28,6 @@ const PopulationBarPlot = {
   data() {
     return {
       populations: [ 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 ],
-      result: '',
     };
   },
   /* html */
@@ -56,7 +55,7 @@ const PopulationBarPlot = {
       }
 
       // TODO: ↑の for 文で、数値の配列をうまく作り、this.result に代入する
-      this.result = xs;
+      this.populations = xs;
     },
   },
 };
