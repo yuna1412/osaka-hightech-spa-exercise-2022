@@ -50,9 +50,12 @@ const PopulationBarPlot = {
 
      let ys = []
 
-     for (const x of xs) {
-       ys.push(x.value)
+     xs.map(function( x ){
+      ys.push(x.value)
      }
+     //for (const x of xs) {
+       //ys.push(x.value)
+     //}
 
      this.populations = ys;
    },
