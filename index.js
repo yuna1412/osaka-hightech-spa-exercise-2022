@@ -31,6 +31,7 @@ const PopulationBarPlot = {
   },
   /* html */
   template: `
+  <div>{{ api }}</div>
   <div class="container">
     <div
       v-for="population in populations"
