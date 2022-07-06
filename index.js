@@ -14,62 +14,61 @@ const PrefectureCheckbox = {
       ],
     };
   },
-  /* html */
-  template: `
-  <span v-for="(prefecture, index) in prefectures">
-    <input type="checkbox" v-bind:id="'e' + index">
-    <label v-bind:for="'e' + index">{{ prefecture }}</label>
-  </span>
-  `,
+/* html */
+ template: `
+ <span v-for="(prefecture, index) in prefectures">
+   <input type="checkbox" v-bind:id="'e' + index">
+   <label v-bind:for="'e' + index">{{ prefecture }}</label>
+ </span>
+ `,
 };
 
 const PopulationBarPlot = {
-  props: [ 'api' ],
-  data() {
-    return {
-      populations: [ 100, 90, 80, 70, 60, 50, 40, 30, 20, 10 ],
-    };
-  },
-  /* html */
-  template: `
-  <div>{{ result }}</div>
-  <button v-on:click="updateGraph">更新</button>
-  <div class="container">
-    <div
-      v-for="population in populations"
-      class="item"
-      v-bind:style="'height: ' + population + 'px;'"
-    ></div>
-  </div>
-  `,
-  methods: {
-    async updateGraph() {
-      let xs = await getPopulations(this.api, 27);
+ props: [ 'api' ],
+ data() {
+   return {
+     populations: [],
+   };
+ },
+ /* html */
+ template: `
+ <button v-on:click="updateGraph">更新</button>
+ <div class="container">
+   <div
+     v-for="population in populations"
+     class="item"
+     v-bind:style="'height: ' + population + 'px;'"
+   ></div>
+ </div>
+ `,
+ methods: {
+   async updateGraph() {
+     let xs = await getPopulations(this.api, 27);
 
-      // JSON から、'result' -> 'data' -> 0 番目 -> 'data'，と辿った箇所を xs に代入
-      xs = xs['result']['data'][0]['data'];
-      let ys = []
-      // xs を for 文で回し、中身の value をそれぞれ表示する
-      for (const x of xs) {
-        ys.push(x.value)
-      }
+     // JSON から、'result' -> 'data' -> 0 番目 -> 'data'，と辿った箇所を xs に代入
+     xs = xs['result']['data'][0]['data'];
 
-      // TODO: ↑の for 文で、数値の配列をうまく作り、this.result に代入する
-      this.populations = xs;
-    },
-  },
+     let ys = []
+
+     for (const x of xs) {
+       ys.push(x.value)
+     }
+
+     this.populations = ys;
+   },
+ },
 };
 
 const RootComponent = {
-  data() {
-    return {
-      'api': '',
-    };
-  },
-  components: {
-    PrefectureCheckbox,
-    PopulationBarPlot,
-  },
+ data() {
+   return {
+     'api': '',
+   };
+ },
+ components: {
+   PrefectureCheckbox,
+   PopulationBarPlot,
+ },
 };
 
 Vue.createApp(RootComponent).mount('#app');
