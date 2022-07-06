@@ -28,4 +28,4 @@ async function getPopulations(apiKey, prefId) {
   const json = await response.json();
 
   return json;
-}
+}api/v1/population/composition/perYear
