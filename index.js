@@ -37,7 +37,7 @@ const PopulationBarPlot = {
    <div
      v-for="population in populations"
      class="item"
-     v-bind:style="'height: ' + population/1000 + 'px;'"
+     v-bind:style="'height: ' + population + 'px;'"
    ></div>
  </div>
  `,
@@ -50,11 +50,10 @@ const PopulationBarPlot = {
 
      let ys = []
 
-     xs.map(function( x ){
-      ys.push(x.value)
-     })
+     ys = xs.map(function(x) {
+      return x.value / 30000;
+    });
      this.populations = ys;
-     console.log(ys.length);
    },
  },
 };
