@@ -48,12 +48,13 @@ const PopulationBarPlot = {
      // JSON から、'result' -> 'data' -> 0 番目 -> 'data'，と辿った箇所を xs に代入
      xs = xs['result']['data'][0]['data'];
 
-     let ys = []
+     let ys = [].style = '50px';
 
      xs.map(function( x ){
       ys.push(x.value)
      })
      this.populations = ys;
+     console.log(ys.length);
    },
  },
 };
