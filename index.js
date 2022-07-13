@@ -1,7 +1,10 @@
 // TODO: 公式リファレンスに沿って JavaScript を記述
 const PrefectureCheckbox = {
-  data(){
-    return{
+  props: [
+    'setPrefecture', // 3) 外部から県番号変更用の関数を受け取れるようにする
+  ],
+  data() {
+    return {
       prefectures: [
         '北海道',
         '青森県','岩手県','宮城県','秋田県','山形県','福島県',
@@ -15,59 +18,68 @@ const PrefectureCheckbox = {
     };
   },
 /* html */
- template: `
- <span v-for="(prefecture, index) in prefectures">
-   <input type="checkbox" v-bind:id="'e' + index">
-   <label v-bind:for="'e' + index">{{ prefecture }}</label>
- </span>
- `,
+template: `
+<span v-for="(prefecture, index) in prefectures">
+  <!-- 3) チェックボックスの変化を監視して、県番号変更用の関数を呼び出す -->
+  <input type="checkbox" v-bind:id="'e' + index" v-on:change="setPrefecture(index + 1)">
+  <label v-bind:for="'e' + index">{{ prefecture }}</label>
+</span>
+`,
 };
 
 const PopulationBarPlot = {
- props: [ 'api' ],
- data() {
-   return {
-     populations: [],
-   };
- },
- /* html */
- template: `
- <button v-on:click="updateGraph">更新</button>
- <div class="container">
-   <div
-     v-for="population in populations"
-     class="item"
-     v-bind:style="'height: ' + population + 'px;'"
-   ></div>
- </div>
- `,
- methods: {
-   async updateGraph() {
-     let xs = await getPopulations(this.api, 27);
+props: [
+  'api',
+  'prefecture', // 2) 外部から県番号を受け取れるようにする
+],
+data() {
+  return {
+    populations: [],
+  };
+},
+/* html */
+template: `
+<button v-on:click="updateGraph">更新</button>
+<div class="container">
+  <div
+    v-for="population in populations"
+    class="item"
+    v-bind:style="'height: ' + population + 'px;'"
+  ></div>
+</div>
+`,
+methods: {
+  async updateGraph() {
+    // 2) 外部から受け取った県番号も考慮して、RESAS API を用いる
+    const xs = await getPopulations(this.api, this.prefecture);
 
-     // JSON から、'result' -> 'data' -> 0 番目 -> 'data'，と辿った箇所を xs に代入
-     xs = xs['result']['data'][0]['data'];
+    // 加工用の関数
+    function f(obj) {
+      return obj.value / 50000;
+    }
 
-     let ys = []
-
-     ys = xs.map(function(x) {
-      return x.value / 30000;
-    });
-     this.populations = ys;
-   },
- },
+    this.populations = xs.map(f);
+  },
+},
 };
 
 const RootComponent = {
- data() {
-   return {
-     'api': '',
-   };
- },
- components: {
-   PrefectureCheckbox,
-   PopulationBarPlot,
- },
+data() {
+  return {
+    'api': '',
+    'prefecture': 27, // 1) 県番号用の State を用意
+  };
+},
+methods: {
+  // 1) 県番号を変更するためのメソッドを用意
+  setPrefecture(n) {
+    this.prefecture = n;
+  },
+},
+components: {
+  PrefectureCheckbox,
+  PopulationBarPlot,
+},
 };
 
 Vue.createApp(RootComponent).mount('#app');
